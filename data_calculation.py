@@ -24,6 +24,11 @@ __update__ = ["20190103"]
 
 
 def data_conduct(data, inter):
+	"""
+	calulate process
+	total three step calulate.
+	The computed result add to the end column of origin table
+	"""
 	group = set(list(data["Sample Name"]))
 	diff_dict = defaultdict(array)
 	#group the data
@@ -61,6 +66,11 @@ def repeat(arry):
 
 
 def integrate(target, sample, name, group_num, df):
+	"""
+	Integrate data processing results
+	function transDf() calls it
+	accept and return a DataFrame
+	"""
 	index, names = [], []
 	res_dict = defaultdict(list)
 	for row in sample:
@@ -82,6 +92,10 @@ def integrate(target, sample, name, group_num, df):
 
 
 def clean_table(input_file):
+	"""
+	Clean data, accept a dirty DataFrame 
+	and save a clear DataFrame to Excel file
+	"""
 	table = read_excel(input_file, index=False, header=None, sheet_name="Results")
 	table = table.dropna(axis=0, thresh=3)
 	table = table.dropna(axis=1, how='any')
@@ -128,8 +142,8 @@ if __name__ == "__main__":
 	inter = "actin"
 	name = "Gapdh-siRNA"
 	# input_file = "test_data.xls"
-	input_file = "origin_data.xls"
-	outfile = "test_deal_2.xlsx"
+	input_file = "test_data_1.xls"
+	outfile = "test_result_2.xlsx"
 	#call the function
 	#data_conduct(input_file, outfile, inter)
 	trans = transDf(input_file, outfile, inter, name)
